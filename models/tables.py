@@ -16,7 +16,7 @@ class SortableTable(Table):
     url_counts = Col('URL_counts', column_html_attrs={'class': 'text-center border text-xs md:text-sm lg:text-base xl:text-sm'})
     link = LinkCol(
         'View', 'flask_link', url_kwargs=dict(id='id', model='model'), url_kwargs_extra=dict(tab='data'), allow_sort=False,
-        column_html_attrs={'class': 'text-center text-xs md:text-sm lg:text-base xl:text-sm'})
+        column_html_attrs={'class': 'text-center text-xs md:text-sm lg:text-base xl:text-sm text-blue-700'})
     allow_sort = True
     classes = ['table-auto', 'border-2', 'border-black', 'border-collapse']
     #thead_classes = ['px-1']

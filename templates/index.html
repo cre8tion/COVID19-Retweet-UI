@@ -24,8 +24,8 @@
             {% endwith %}
         </p>
         <div class="flex flex-row justify-center space-x-6">
-          <a class="text-xl" href="{{url_for('index', tab='overview')}}">Overview</a>
-          <a class="text-xl" href="{{url_for('index', tab='data')}}">Explore Data</a>
+          <a class="text-xl border border-black rounded-xl p-2" href="{{url_for('index', tab='overview')}}">Overview</a>
+          <a class="text-xl border border-black rounded-xl p-2" href="{{url_for('index', tab='data')}}">Explore Data</a>
         </div>
         <br/>
         <div id="main" class="flex flex-col m-auto">
@@ -34,14 +34,13 @@
                 <p class="text-3xl font-bold">XG Boost Model</p>
                 <p class="text-2xl font-bold">Feature Engineering</p>
                 <img src='data:image/png;base64,{{ feature_engineering_chart }}' ></img>
-                
                 <div id="chart" class="chart"></div>
             </div>
           {% elif tab == 'data' %}
             <div class="flex flex-row justify-center space-x-6">
-              <a class="text-xl" href="{{url_for('index', model='0', tab='data')}}">XG Boost</a>
-              <a class="text-xl" href="{{url_for('index', model='1', tab='data')}}">LSTM</a>
-              <a class="text-xl" href="{{url_for('index', model='2', tab='data')}}">Neural Network</a>
+              <a class="text-xl text-blue-700" href="{{url_for('index', model='0', tab='data')}}">XG Boost</a>
+              <a class="text-xl text-blue-700" href="{{url_for('index', model='1', tab='data')}}">LSTM</a>
+              <a class="text-xl text-blue-700" href="{{url_for('index', model='2', tab='data')}}">Neural Network</a>
             </div>
             <div class="h-8"></div>
             <div class="flex flex-col-reverse xl:flex-row justify-center w-full px-2">

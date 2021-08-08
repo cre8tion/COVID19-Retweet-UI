@@ -37,22 +37,9 @@ def index():
                           sort_reverse=reverse, table_id=model)
         return render_template("index.html", load_data=load_data, table=table, tab=tab)
     else:
-        """
-        df = pd.DataFrame({
-            "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-            "Amount": [4, 1, 2, 2, 4, 5],
-            "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-        })
-
-        fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
-
-        graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-        """
         feature_engineering_chart = load_xgboost_feature_engineering_chart()
-
-
+        
         return render_template("index.html", load_data=load_data, tab=tab, feature_engineering_chart = feature_engineering_chart)
-        #return render_template("index.html", load_data=load_data, tab=tab, graphJSON=graphJSON, data = data)
 
 if __name__ == "__main__":
   app.run(host='127.0.0.1', port=5000, debug = True)

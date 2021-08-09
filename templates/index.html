@@ -69,25 +69,29 @@
             </div>
             <div class="h-8"></div>
             <div class="flex flex-col-reverse xl:flex-row justify-center w-full px-2">
-              <div class="flex flex-row w-full xl:w-2/3 justify-center">
-                {{ table }}
-              </div>
-              <div class="flex flex-col w-full xl:w-1/3 text-left p-4 lg:px-8 xl:px-2">
-                {% if item %}
-                  <p class="text-xl">ID: {{item.id}}</p>
-                  <p class="text-xl">Username: {{item.username}}</p>
-                  <p class="text-xl">Timestamp: {{item.timestamp}}</p>
-                  <p class="text-xl">Followers: {{item.followers}}</p>
-                  <p class="text-xl">Friends: {{item.friends}}</p>
-                  <p class="text-xl">Favourites: {{item.favourites}}</p>
-                  <p class="text-xl">Mentions_count: {{item.mentions_counts}}</p>
-                  <p class="text-xl">Hashtag_count: {{item.hashtag_counts}}</p>
-                  <br />
-                  <br />
-                  <p class="text-xl">Actual Retweets: {{item.retweets}}</p>
-                  <p class="text-xl">Predicted Retweets: {{item.predicted_retweets}}</p>
-                {% endif %}
-              </div>
+              {% if item %}
+                <div class="flex flex-row w-full xl:w-2/3 justify-center">
+                  {{ table }}
+                </div>
+                <div class="flex flex-col w-full xl:w-1/3 text-left p-4 lg:px-8 xl:px-2">
+                    <p class="text-xl">ID: {{item.id}}</p>
+                    <p class="text-xl">Username: {{item.username}}</p>
+                    <p class="text-xl">Timestamp: {{item.timestamp}}</p>
+                    <p class="text-xl">Followers: {{item.followers}}</p>
+                    <p class="text-xl">Friends: {{item.friends}}</p>
+                    <p class="text-xl">Favourites: {{item.favourites}}</p>
+                    <p class="text-xl">Mentions_count: {{item.mentions_counts}}</p>
+                    <p class="text-xl">Hashtag_count: {{item.hashtag_counts}}</p>
+                    <br />
+                    <br />
+                    <p class="text-xl">Actual Retweets: {{item.retweets}}</p>
+                    <p class="text-xl">Predicted Retweets: {{item.predicted_retweets}}</p>
+                </div>
+              {% else %}
+                <div class="flex flex-row w-full justify-center">
+                  {{ table }}
+                </div>
+              {% endif %}
             </div>
           {% endif %}
         </div>

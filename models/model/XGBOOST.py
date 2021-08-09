@@ -62,10 +62,6 @@ def train(
         for train_file in tqdm(epoch_train):
             train_df = pd.read_feather(train_file)
             x, y, feature_names = _extract_x_y_featurenames(train_df, relevant_features)
-            # y = train_df["Retweets"].values
-            # x = train_df[relevant_features]
-            # feature_names = x.columns
-            # x = x.values
             dtrain = xgb.DMatrix(x, label=y, feature_names=feature_names)
             model = xgb.train(
                 params, dtrain, num_boost_round=num_boost_round, xgb_model=model
@@ -76,15 +72,7 @@ def train(
         for val_file in tqdm(epoch_val):
             val_df = pd.read_feather(val_file)
             x, y, feature_names = _extract_x_y_featurenames(val_df, relevant_features)
-            # y = val_df["Retweets"].values
-            # x = val_df[relevant_features]
-            # feature_names = x.columns
-            # x = x.values
             y_pred = predict(model, x, feature_names)
-            # dval = xgb.DMatrix(x, feature_names=feature_names)
-            # y_pred = model.predict(dval)
-            # y_pred = y_pred.clip(min=0)
-            # y = np.nan_to_num(y)
             msle = mean_squared_log_error(y, y_pred)
             count += 1
             overall_msle += msle
@@ -117,12 +105,11 @@ def _extract_x_y_featurenames(df, relevant_features):
     return x, y, feature_names
 
 
-def load_xgboost_prediction(df):
+def load_prediction(df):
     model = load_model("./models/model/xgboost.model")
     with open("./models/model/relevant_features.json") as f:
         relevant_features = json.load(f)
     x, y, feature_names = _extract_x_y_featurenames(df, relevant_features)
-    # x = np.reshape(x,(1, x.size))
     prediction = predict(model, x)
     return prediction
 

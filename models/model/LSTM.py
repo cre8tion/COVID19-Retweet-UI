@@ -108,14 +108,13 @@ def split_sequences(sequences, n_steps):
 def load_model(file):
     newmodel = GenModel([256], 30, 2, 0, True, 0.5).double()
     newmodel.to(device)
-
     newmodel.load_state_dict(torch.load(file, map_location=device))
     newmodel.eval()
 
     return newmodel
 
 
-def load_lstm_prediction(df):
+def load_prediction(df):
     model = load_model("./models/model/LSTM.pt")
     df2 = df[[c for c in df if c not in ["Retweets"]] + ["Retweets"]]
     n_timesteps = 30
@@ -128,11 +127,9 @@ def load_lstm_prediction(df):
     predicted_retweets = predictions[0].view(
         -1,
     )
-    # print(predicted_retweets)
-    # print(predicted_retweets.shape)
     return predicted_retweets
 
 
 if __name__ == "__main__":
     df = pd.read_feather("../../data/data_188489.ftr")
-    load_lstm_prediction(df)
+    load_prediction(df)

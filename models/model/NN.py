@@ -52,20 +52,17 @@ def split_sequences(sequences):
 def load_model(file):
     newmodel = MLP(856, 3, 256, 0.5).double()
     newmodel.to(device)
-
     newmodel.load_state_dict(torch.load(file, map_location=device))
     newmodel.eval()
-
     return newmodel
 
 
-def load_nn_prediction(df):
+def load_prediction(df):
     model = load_model("./models/model/NN.pt")
 
     df2 = df[[c for c in df if c not in ["Retweets"]] + ["Retweets"]]
     batch_size = 100  # tweak for number of files you want
     x1, y1 = split_sequences(df2.fillna(0).to_numpy())  # for the whole df
-    # print(x1)
     x1 = torch.Tensor(x1).double().to(device)
     predictions = model(x1)
     predicted_retweets = predictions.view(
@@ -77,5 +74,5 @@ def load_nn_prediction(df):
 
 if __name__ == "__main__":
     df = pd.read_feather("../../data/data_188489.ftr")
-    print(load_nn_prediction(df))
+    print(load_prediction(df))
     # modelload((856, 3, 256, 0.5),'./NN.pt','../../data/data_188489.ftr')

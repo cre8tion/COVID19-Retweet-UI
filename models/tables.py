@@ -79,7 +79,6 @@ class SortableTable(Table):
     )
     allow_sort = True
     classes = ["table-auto", "border-2", "border-black", "border-collapse"]
-    # thead_classes = ['px-1']
 
     def sort_url(self, col_key, reverse=False):
         if reverse:

@@ -2,9 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from services.load import load_data, load_xgboost_feature_engineering_chart
 from models.items import Item
 from models.tables import SortableTable
-
-# import plotly
-# import plotly.express as px
 import pandas as pd
 import math
 import json
@@ -17,17 +14,16 @@ app.secret_key = "super secret key"
 @app.route("/<int:id>")
 def flask_link(id):
     model = request.args.get("model", 0)
-    element = Item.get_element_by_id(id, model)
-    sort = request.args.get("sort", "id")
-    tab = request.args.get("tab", "data")
-    reverse = request.args.get("direction", "asc") == "desc"
     try:
         model = int(model)
     except ValueError:
         model = 0
         flash("Model not an Integer, defaulting to first model", "error")
+    sort = request.args.get("sort", "id")
+    tab = request.args.get("tab", "data")
+    reverse = request.args.get("direction", "asc") == "desc"
+    element = Item.get_element_by_id(id, model)
 
-    # Call data from service.load with parameters
     table = SortableTable(
         Item.get_sorted_by(model, sort, reverse),
         sort_by=sort,

@@ -1,7 +1,7 @@
 import pandas as pd
-from models.model.XGBOOST import load_xgboost_prediction
-from models.model.LSTM import load_lstm_prediction
-from models.model.NN import load_nn_prediction
+from models.model.XGBOOST import load_prediction as load_xgboost_prediction
+from models.model.LSTM import load_prediction as load_lstm_prediction
+from models.model.NN import load_prediction as load_nn_prediction
 import matplotlib
 from matplotlib.figure import Figure
 from io import BytesIO

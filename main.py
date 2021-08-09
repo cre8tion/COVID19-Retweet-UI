@@ -11,15 +11,22 @@ import json
 
 
 app = Flask(__name__, static_folder="static")
+app.secret_key = "super secret key"
 
 
 @app.route("/<int:id>")
 def flask_link(id):
-    model = int(request.args.get("model", 0))
+    model = request.args.get("model", 0)
     element = Item.get_element_by_id(id, model)
     sort = request.args.get("sort", "id")
     tab = request.args.get("tab", "data")
     reverse = request.args.get("direction", "asc") == "desc"
+    try:
+        model = int(model)
+    except ValueError:
+        model = 0
+        flash("Model not an Integer, defaulting to first model", "error")
+
     # Call data from service.load with parameters
     table = SortableTable(
         Item.get_sorted_by(model, sort, reverse),
@@ -37,7 +44,13 @@ def index():
     sort = request.args.get("sort", "id")
     reverse = request.args.get("direction", "asc") == "desc"
     tab = request.args.get("tab", "overview")
-    model = int(request.args.get("model", 0))
+    model = request.args.get("model", 0)
+    try:
+        model = int(model)
+    except ValueError:
+        model = 0
+        flash("Model not an Integer, defaulting to first model", "error")
+
     if tab == "data":
         table = SortableTable(
             Item.get_sorted_by(model, sort, reverse),

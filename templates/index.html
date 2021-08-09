@@ -12,17 +12,16 @@
         <br />
         <h3 class="text-center text-2xl font-sans">View Sample Results from our finalised models</h2>
         <br />
-        <p>
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-              <ul>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="text-center border-4 border-red-700">
               {% for message in messages %}
-                <li>{{ message }}</li>
+                <li class="text-lg font-bold text-red-700">{{ message }}</li>
               {% endfor %}
-              </ul>
-              {% endif %}
-            {% endwith %}
-        </p>
+            </ul>
+            <div class="h-8"></div>
+          {% endif %}
+        {% endwith %}
         <div class="flex flex-row justify-center space-x-6">
           <a class="text-xl border border-black rounded-xl p-2" href="{{url_for('index', tab='overview')}}">Overview</a>
           <a class="text-xl border border-black rounded-xl p-2" href="{{url_for('index', tab='data')}}">Explore Data</a>

@@ -58,7 +58,11 @@
                 <p class="text-3xl font-bold">XG Boost Model</p>
                 <p class="text-2xl font-bold">Feature Engineering</p>
                 <img src='data:image/png;base64,{{ feature_engineering_chart }}' ></img>
-                <div id="chart" class="chart"></div>
+                <p class="text-2xl font-bold">Feature Importance</p>
+                <img src="{{url_for('static', filename='feature_importance.png')}}" ></img>
+                <p class="text-2xl font-bold">Sample Decision Tree in model</p>
+                <img src="{{url_for('static', filename='decision.png')}}" ></img>
+                <div class="h-8"></div>
             </div>
           {% elif tab == 'data' %}
             <div class="flex flex-row justify-center space-x-6">
